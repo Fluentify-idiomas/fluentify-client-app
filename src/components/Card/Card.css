@@ -1,0 +1,17 @@
+.card-container {
+ background-color: #26074D;
+ border-radius: 24px;
+ height: 240px;
+ width: 240px;
+
+ display: flex;
+ flex-direction: column;
+ justify-content: space-evenly;
+ align-items: center;
+}
+
+.card-container p {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}
