@@ -1,7 +1,7 @@
-import './Card.css'
+import './style.css'
 
 type CardComponentType = {
-  icon: any;
+  icon: string;
   texts: string[];
   alt: string;
 }

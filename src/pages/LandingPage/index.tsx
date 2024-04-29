@@ -1,6 +1,13 @@
-import Card from '../../components/Card/Card';
-import './LandingPage.css';
+import './style.css';
+
 import Astrounat from '/imgs/astronaut.svg';
+import PcFlagsLightning from '/imgs/pc-flags-lightning.svg';
+import ManReading from '/imgs/man-reading.svg';
+
+import Card from '@/components/Card';
+import Footer from '@/components/Footer/index';
+// import Footer from '../../components/Footer';
+
 
 function RegisterCallToActionButton() {
   return (
@@ -17,7 +24,6 @@ function LoginCallToActionButton() {
 function Header() {
   return (
     <div className='header-container'>
-      {/* <img src="" alt="" /> */}
       <a href="">
         <p className='logo'>FLUENTIFY</p>
       </a>
@@ -32,18 +38,13 @@ function Header() {
           <li>
             <a href="">Serviços</a>
           </li>
+          <li>
+            <a href="">Contatos</a>
+          </li>
         </ul>
         <RegisterCallToActionButton />
       </nav>
     </div>
-  )
-}
-
-function Footer() {
-  return (
-    <>
-      Footer
-    </>
   )
 }
 
@@ -57,8 +58,6 @@ function DuoCtaBtn() {
 }
 
 function LandingPage() {
-  console.log(Astrounat)
-
   return (
     <>
       <Header />
@@ -120,6 +119,41 @@ function LandingPage() {
         </div>
       </section>
       <section className='mountain-two'></section>
+      <section className='third-section-container'>
+        <h1>
+          6 idiomas para aprender com <span className='text-color-one'>Mastria</span><br/>
+          Na plataforma da <span className='text-color-two'>FLUENTIFY</span>
+        </h1>
+        <div className='third-section-one'>
+          <ul>
+            <li>INGLÊS</li>
+            <li>ESPANHOL</li>
+            <li>INGLÊS</li>
+            <li>FRANCÊS</li>
+            <li>ALEMÃO</li>
+            <li>GRÊGO</li>
+            <li>HOLANDÊS</li>
+          </ul>
+          <img src={PcFlagsLightning} />
+        </div>
+      </section>
+      <section className="mountain-three"></section>
+      <section className='fourth-section-container'>
+        <img src={ManReading} alt="" />
+        <div className='fourth-section-one'>
+          <div className='fourth-section-two'>
+            <h1>
+              Crie sua conta e comece <span className='text-color-one'>Agora</span><br />
+              a estudar com a <span className='text-color-two'>FLUENTIFY</span>
+            </h1>
+            <p>
+              Venha sem compromisso com a possibilidade de<br />
+              realizar um reembolso em até 7 dias
+            </p>
+            <DuoCtaBtn></DuoCtaBtn>
+          </div>
+        </div>
+      </section>
       <Footer />
     </>
   )

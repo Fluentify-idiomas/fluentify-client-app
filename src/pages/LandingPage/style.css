@@ -88,11 +88,22 @@
   padding-right: 116px;
 }
 
-.mountain-one {
+.mountain-one, .mountain-two, .mountain-three {
   height: 300px;
-  background-image: url('/imgs/mountains-one.svg');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.mountain-one {
+  background-image: url('/imgs/mountains-one.svg');
+}
+
+.mountain-two {
+  background-image: url('/imgs/mountains-two.svg');
+}
+
+.mountain-three {
+  background-image: url('/imgs/mountains-three.svg');
 }
 
 .second-section-container {
@@ -145,9 +156,64 @@
   margin-bottom: 14px;
 }
 
-.mountain-two {
-  height: 300px;
-  background-image: url('/imgs/mountains-two.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
+.third-section-container {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, #1D1160, #080315);
+}
+
+.third-section-container h1 {
+  margin: auto;
+  margin-top: 64px;
+  margin-bottom: 62px;
+  font-size: 3.375rem;
+  text-align: left;
+}
+
+.third-section-one {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: 58px;
+}
+
+.third-section-one ul {
+  text-align: left;
+  font-size: 1.75rem;
+}
+
+.third-section-one li {
+  margin-bottom: 24px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.third-section-one li:nth-child(odd) {
+  border-bottom: 1px solid #8FFF7C;
+}
+
+.third-section-one li:nth-child(even) {
+  border-bottom: 1px solid #FC7CFF;
+}
+
+.fourth-section-container {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to bottom, #10012C, #5A189A);
+  padding-bottom: 112px;
+}
+
+.fourth-section-one {
+  text-align: left;
+}
+
+.fourth-section-one h1 {
+  font-size: 3.375rem;
+  margin-top: 64px;
+  margin-bottom: 14px;
+}
+
+.fourth-section-one p {
+ font-size: 1.25rem;
+ margin-bottom: 14px; 
 }
