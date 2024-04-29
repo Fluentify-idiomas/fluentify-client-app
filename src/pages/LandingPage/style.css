@@ -115,7 +115,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 64px 112px;
+  /* padding: 64px 112px; */
+  padding: 64px 0;
 }
 
 .second-section-container h1 {
@@ -124,7 +125,8 @@
 
 .second-section-container-inside {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .second-section-container h1 {
@@ -136,7 +138,6 @@
 }
 
 .second-section-one ul {
-  margin-right: 80px;
   display: flex;
 }
 
@@ -198,6 +199,10 @@
 
 .third-section-one li:nth-child(even) {
   border-bottom: 1px solid #FC7CFF;
+}
+
+.third-section-one img {
+  width: 40%;
 }
 
 .fourth-section-container {

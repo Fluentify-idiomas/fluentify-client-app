@@ -94,7 +94,7 @@ function LandingPage() {
               </li>
             </ul>
             <ul>
-            <li>
+              <li>
                 <Card icon="/imgs/gaming.svg" texts={["Aprendizado", "Gamificado"]} alt="" />
               </li>
               <li>
