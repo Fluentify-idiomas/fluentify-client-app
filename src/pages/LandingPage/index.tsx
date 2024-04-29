@@ -121,7 +121,7 @@ function LandingPage() {
       <section className='mountain-two'></section>
       <section className='third-section-container'>
         <h1>
-          6 idiomas para aprender com <span className='text-color-one'>Mastria</span><br/>
+          6 idiomas para aprender com <span className='text-color-one'>Maestria</span><br/>
           Na plataforma da <span className='text-color-two'>FLUENTIFY</span>
         </h1>
         <div className='third-section-one'>

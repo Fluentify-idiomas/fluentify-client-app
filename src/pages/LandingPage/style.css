@@ -88,6 +88,10 @@
   padding-right: 116px;
 }
 
+.first-section-two img {
+  width: 100%;
+}
+
 .mountain-one, .mountain-two, .mountain-three {
   height: 300px;
   background-size: cover;
@@ -132,7 +136,7 @@
 }
 
 .second-section-one ul {
-  margin-right: 100px;
+  margin-right: 80px;
   display: flex;
 }
 
