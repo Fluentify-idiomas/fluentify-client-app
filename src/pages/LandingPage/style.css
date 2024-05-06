@@ -13,6 +13,9 @@
   justify-content: space-between;
   background-color: #10002B;
   padding: 24px 42px;
+  box-sizing: border-box;
+  position: fixed;
+  width: 100vw;
 }
 
 .logo {
@@ -55,7 +58,7 @@
  }
 
 .first-section-container {
-  padding-top: 84px;
+  padding-top: 184px;
   padding-bottom: 100px;
   display: flex;
   justify-content: space-between;

@@ -11,20 +11,20 @@ import Footer from '@/components/Footer/index';
 
 function RegisterCallToActionButton() {
   return (
-    <a className="register-cta-btn" href="">APRENDER</a>
+    <a className="register-cta-btn" href="/register">APRENDER</a>
   )
 }
 
 function LoginCallToActionButton() {
   return (
-    <a className="login-cta-btn" href="">JA TEM CONTA ?</a>
+    <a className="login-cta-btn" href="/login">JA TEM CONTA ?</a>
   )
 }
 
 function Header() {
   return (
     <div className='header-container'>
-      <a href="">
+      <a href="/">
         <p className='logo'>FLUENTIFY</p>
       </a>
       <nav className="header-nav-container">
