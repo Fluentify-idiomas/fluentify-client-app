@@ -24,7 +24,7 @@ function LoginCallToActionButton() {
 function Header() {
   return (
     <div className='header-container'>
-      <a href="/">
+      <a href="#">
         <p className='logo'>FLUENTIFY</p>
       </a>
       <nav className="header-nav-container">
