@@ -89,6 +89,7 @@ export function RegisterPage() {
               <option value="">Gênero</option>
               <option value="fame">Masculino</option>
               <option value="female">Feminino</option>
+              <option value="other">Prefiro não informar</option>
               <option value="other">Outro</option>
             </select>
             <fieldset className="password-container">

@@ -30,16 +30,16 @@ function Header() {
       <nav className="header-nav-container">
         <ul className="header-list-container">
           <li>
-            <a href="">Inicío</a>
+            <a href="#">Inicío</a>
           </li>
           <li>
-            <a href="">Sobre</a>
+            <a href="#metodos-ensino">Métodos</a>
           </li>
           <li>
-            <a href="">Serviços</a>
+            <a href="#idiomas">Idiomas</a>
           </li>
           <li>
-            <a href="">Contatos</a>
+            <a href="#7-dias">7 dias</a>
           </li>
         </ul>
         <RegisterCallToActionButton />
@@ -77,7 +77,7 @@ function LandingPage() {
           <img src={Astrounat} alt="" />
         </div>
       </section>
-      <section className='mountain-one'></section>
+      <section id="metodos-ensino" className='mountain-one'></section>
       <section className='second-section-container'>
         <h1>Métodos de Ensino</h1>
         <div className='second-section-container-inside'>
@@ -118,7 +118,7 @@ function LandingPage() {
           </div>
         </div>
       </section>
-      <section className='mountain-two'></section>
+      <section id="idiomas" className='mountain-two'></section>
       <section className='third-section-container'>
         <h1>
           6 idiomas para aprender com <span className='text-color-one'>Maestria</span><br/>
@@ -137,7 +137,7 @@ function LandingPage() {
           <img src={PcFlagsLightning} />
         </div>
       </section>
-      <section className="mountain-three"></section>
+      <section id="7-dias" className="mountain-three"></section>
       <section className='fourth-section-container'>
         <img src={ManReading} alt="" />
         <div className='fourth-section-one'>
