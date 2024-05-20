@@ -4,8 +4,8 @@ import Astrounat from '/imgs/astronaut.svg';
 import PcFlagsLightning from '/imgs/pc-flags-lightning.svg';
 import ManReading from '/imgs/man-reading.svg';
 
-import Card from '@/components/Card';
 import Footer from '@/components/Footer/index';
+import Card from '@/components/LandingPage/Card';
 // import Footer from '../../components/Footer';
 
 
