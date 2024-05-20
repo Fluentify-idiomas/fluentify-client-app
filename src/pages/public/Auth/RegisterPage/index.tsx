@@ -47,7 +47,7 @@ export function RegisterPage() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const { name, password, passwordConfirm } = data;
+      const { password, passwordConfirm } = data;
 
       const passwordMatch = password === passwordConfirm;
 
