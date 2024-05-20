@@ -60,6 +60,8 @@ export function RegisterPage() {
         }
   
         const result = await axiosInstance.post("/register", payload);
+
+        console.log(result);
   
         if (result) {
           const resultData = await result.data;

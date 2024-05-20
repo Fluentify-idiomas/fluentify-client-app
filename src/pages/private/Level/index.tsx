@@ -46,28 +46,26 @@ export function Level() {
         const result = await axiosInstance.get(`/levels/${id}`);
         const resultData = result.data;
 
-        const levels = resultData.level_list;
-        console.log(levels);
+        console.log(resultData)
 
-        const mockData = [
-          {
-            id: 1,
-            name: 'Iniciante',
-            isBlocked: false,
-          },
-          {
-            id: 2,
-            name: 'Intermediário',
-            isBlocked: true,
-          },
-          {
-            id: 3,
-            name: 'Avançado',
-            isBlocked: true,
+        const moduleList = resultData.module_list;
+        
+        const moduleListMocked = moduleList.map((mod: any) => {
+          if (mod.id == 1) {
+            return {
+              ...mod,
+              isBlocked: false,
+            }
+          } else {
+            return {
+              ...mod,
+              isBlocked: true,
+            }
           }
-        ]
 
-        setLevels(mockData);
+        });
+
+        setLevels(moduleListMocked);
 
         if (resultData.error) throw new Error();
 
