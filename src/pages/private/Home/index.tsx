@@ -1,5 +1,4 @@
 import { axiosInstance } from "@/api/axios";
-import { useAuthentication } from "@/services/auth/auth.hook";
 import {
   Box,
   Card,
@@ -7,23 +6,20 @@ import {
   Flex,
   Grid,
   Heading,
-  Icon,
-  Image,
-  Link,
+  Image
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { RiLogoutBoxLine } from "react-icons/ri";
 
 import Cadeado from "/imgs/cadeado.svg";
 
+import { SidebarMenu } from "@/components/SidebarMenu";
+import { useAppRouter } from "@/services/router/router.hook";
 import Alemao from "/imgs/flags/alemao.svg";
 import Espanhol from "/imgs/flags/espanhol.svg";
 import Frances from "/imgs/flags/frances.svg";
 import Grego from "/imgs/flags/grego.svg";
 import Holandes from "/imgs/flags/holandes.svg";
 import Ingles from "/imgs/flags/ingles.svg";
-import { useAppRouter } from "@/services/router/router.hook";
-import { SidebarMenu } from "@/components/SidebarMenu";
 
 export type LangsType = {
   id: number;
@@ -33,7 +29,7 @@ export type LangsType = {
 };
 
 export function Home() {
-  const { handleSignOut } = useAuthentication();
+  // const { handleSignOut } = useAuthentication();
   const [langs, setLangs] = useState<LangsType[]>([]);
   const [hasFetched, setHasFetched] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);

@@ -11,13 +11,12 @@ import {
 import { useParams } from "react-router-dom";
 
 import { axiosInstance } from "@/api/axios";
-import { useAppRouter } from "@/services/router/router.hook";
 import { useEffect, useState } from "react";
 
+import { SidebarMenu } from "@/components/SidebarMenu";
 import Cadeado from "/imgs/cadeado.svg";
 import ManAstronaut from "/imgs/man-astronaut.svg";
 import WomanAstronaut from "/imgs/woman-astrounaut.svg";
-import { SidebarMenu } from "@/components/SidebarMenu";
 
 type LevelType = {
   id: number;
@@ -39,7 +38,7 @@ export function Level() {
   const [hasFetched, setHasFetched] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const { navigateTo } = useAppRouter();
+  // const { navigateTo } = useAppRouter();
 
   useEffect(() => {
     const fetchData = async () => {
