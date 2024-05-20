@@ -51,15 +51,10 @@ export function RegisterPage() {
 
       const passwordMatch = password === passwordConfirm;
 
-      const firstSpaceIndex = name.indexOf(" ");
-
-      const firstName = name.substring(0, firstSpaceIndex);
-      const lastName = name.substring(firstSpaceIndex + 1);
 
       if (passwordMatch) {
         const payload = {
-          first_name: firstName,
-          last_name: lastName,
+          first_name: data.name,
           email: data.email,
           password: data.password,
         }
