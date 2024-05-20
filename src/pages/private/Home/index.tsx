@@ -89,7 +89,7 @@ export function Home() {
       <Flex justify="center" align="center">
         <Flex
           w="86vw"
-          h="100vh"
+          minH="100vh"
           direction="column"
           align="center"
           justify="center"
