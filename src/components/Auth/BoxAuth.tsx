@@ -12,7 +12,7 @@ interface BoxAuthProps {
 export function BoxAuth({children}: BoxAuthProps) {
 
   return (
-    <Flex direction="column" w="100vw" h="100vh">
+    <Flex direction="column" maxW="100vw" minH="100vh">
       <HeaderAuth />
       <Heading fontSize="2.5rem" fontWeight="bold" mb="35px" alignSelf='center'>
         FLUENTIFY
