@@ -10,69 +10,70 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Link,
-  Spacer,
-  Text,
+  Spacer
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 type Inputs = {
-  name: string;
-  email: string;
   password: string;
   passwordConfirm: string;
 };
 
-export function RegisterPage() {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const toggleShowPassword = () => setShowPassword(!showPassword);
-
-  const [showPasswordConfirm, setShowPasswordConfirm] = React.useState(false);
-  const toggleShowPasswordConfirm = () =>
-    setShowPasswordConfirm(!showPasswordConfirm);
+export function ChangeRecoveryPassword() {
+  let { email, verifyCode } = useParams();
 
   const [submitError, setSubmitError] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const toggleShowPasswordConfirm = () =>
+    setShowPasswordConfirm(!showPasswordConfirm);
 
   const { navigateTo } = useAppRouter();
 
   const {
     register,
+    handleSubmit,
     formState: { errors },
     watch,
-    handleSubmit,
   } = useForm<Inputs>({
     mode: "all",
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const { password, passwordConfirm } = data;
+      setIsSubmitted(true);
 
-      const passwordMatch = password === passwordConfirm;
+      const payload = {
+        user_email: email,
+        code_verify: verifyCode,
+        recovery_code: data.password,
+      }
 
+      const result = await axiosInstance.post("/change_recovery_password", payload);
 
-      if (passwordMatch) {
-        const payload = {
-          first_name: data.name,
-          email: data.email,
-          password: data.password,
-        }
-  
-        const result = await axiosInstance.post("/register", payload);
-  
-        if (result) {
-          const resultData = await result.data;
-          if (!resultData.error) {
-            navigateTo("/login");
-            setSubmitError(false);
-            return;
-          }
+      if (result) {
+        const resultData = await result.data;
+
+        if (!resultData.error) {
+
+          navigateTo('/login');
+          setSubmitError(false);
+          return;
         }
       }
+
+      setIsSubmitted(false);
+
       setSubmitError(true);
     } catch (err) {
       setSubmitError(true);
+      setIsSubmitted(false);
     }
   };
 
@@ -84,52 +85,15 @@ export function RegisterPage() {
     <BoxAuth>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
-          <Flex direction="column" align="center">
+          <Flex direction="column" align="center" justify='center'>
             <Heading
               color="#FC7CFF"
               fontSize="2.5rem"
               fontWeight="bold"
               mb="44px"
             >
-              Criar uma nova conta
+              Digite sua nova senha
             </Heading>
-            <Flex justify="space-between" mb="16px">
-              <Flex direction="column" maxWidth="48%">
-                <Input
-                  id="name"
-                  size="lg"
-                  borderRadius="24px"
-                  placeholder="Digite seu Nome"
-                  _placeholder={{ color: "#F0F0F0b2" }}
-                  borderColor={errors.name ? "red" : "#5A4278"}
-                  {...register("name", { required: "Nome é obrigatório" })}
-                />
-                {errors.name && (
-                  <ErrorMessage ml="12px">{errors.name?.message}</ErrorMessage>
-                )}
-              </Flex>
-              <Spacer />
-              <Flex direction="column" maxWidth="48%">
-                <Input
-                  id="email"
-                  size="lg"
-                  placeholder="Digite seu Email"
-                  borderRadius="24px"
-                  _placeholder={{ color: "#F0F0F0b2" }}
-                  borderColor={errors.email ? "red" : "#5A4278"}
-                  {...register("email", {
-                    required: "Email é obrigatório",
-                    pattern: {
-                      value: /\S+@\S+\.\S+/,
-                      message: "Email está com formato inválido",
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <ErrorMessage ml="12px">{errors.email?.message}</ErrorMessage>
-                )}
-              </Flex>
-            </Flex>
             <Flex justify="space-between" mb="52px">
               <Flex direction="column" maxWidth="48%">
                 <InputGroup size="lg">
@@ -201,24 +165,18 @@ export function RegisterPage() {
               color="black"
               fontWeight="bold"
               borderRadius="24px"
-              type="submit"
               _hover={{ bgColor: "#FC7CFF" }}
               mb="30px"
               w="100%"
+              type="submit"
+              isLoading={isSubmitted}
+              loadingText='Enviando'
             >
-              Cadastrar
+              Alterar senha
             </Button>
-            { submitError && (
-              <ErrorMessage mb="10px">
-              Conta já cadastrada!
-            </ErrorMessage>
+            {submitError && (
+              <ErrorMessage mb="10px">Ocorreu algum problema!</ErrorMessage>
             )}
-            <Text>
-              Ja tem conta ?<br />
-              <Link href="/login" color="#8B64B0">
-                Faça o Login
-              </Link>
-            </Text>
           </Flex>
         </FormControl>
       </form>

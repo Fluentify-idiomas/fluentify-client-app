@@ -153,7 +153,7 @@ export function LoginPage() {
             )}
             <Text alignSelf="flex-start" mb="54px">
               Esqueceu sua senha ?
-              <Link href="/" color="#E1F030" ml='4px'>
+              <Link href="/password-recovery" color="#E1F030" ml='4px'>
                 Recupere aqui
               </Link>
             </Text>

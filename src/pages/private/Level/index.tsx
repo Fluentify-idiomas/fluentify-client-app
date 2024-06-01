@@ -6,7 +6,7 @@ import {
   Grid,
   Heading,
   Image,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
@@ -17,18 +17,23 @@ import { SidebarMenu } from "@/components/SidebarMenu";
 import Cadeado from "/imgs/cadeado.svg";
 import ManAstronaut from "/imgs/man-astronaut.svg";
 import WomanAstronaut from "/imgs/woman-astrounaut.svg";
+import { useAppRouter } from "@/services/router/router.hook";
+import { userSessionStorageToken } from "@/services/auth/auth.provider";
 
 type LevelType = {
   id: number;
   name: string;
-  isBlocked?: boolean;
+  is_blocked: boolean;
 };
 
-// export type LangInfo = {
-//   id: number;
-//   name: string;
-//   levels: LevelType[]
-// }
+export type LevelData = {
+  error: any;
+  level_info: {
+    name: string;
+    id: number;
+  };
+  level_list: LevelType[];
+};
 
 export function Level() {
   let { id } = useParams();
@@ -38,36 +43,26 @@ export function Level() {
   const [hasFetched, setHasFetched] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  // const { navigateTo } = useAppRouter();
+  const { navigateTo } = useAppRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axiosInstance.get(`/levels/${id}`);
-        const resultData = result.data;
+        const user_id = sessionStorage.getItem(userSessionStorageToken);
 
-        console.log(resultData)
+        const payload = {
+          lang_id: id,
+          user_id: user_id,
+        };
 
-        const moduleList = resultData.module_list;
-        
-        const moduleListMocked = moduleList.map((mod: any) => {
-          if (mod.id == 1) {
-            return {
-              ...mod,
-              isBlocked: false,
-            }
-          } else {
-            return {
-              ...mod,
-              isBlocked: true,
-            }
-          }
+        const result = await axiosInstance.post("/levels", payload);
+        const resultData: LevelData = result.data;
 
-        });
+        const levelList = resultData.level_list;
 
-        setLevels(moduleListMocked);
+        setLevels(levelList);
 
-        if (resultData.error) throw new Error();
+        if (resultData.error) throw new Error("erou");
 
         setHasFetched(true);
       } catch (error) {
@@ -90,10 +85,10 @@ export function Level() {
         align="center"
         justify="center"
       >
-        <Heading color='#8FFF7C' mb="32px" fontSize="4rem" textAlign="center">
+        <Heading color="#8FFF7C" mb="32px" fontSize="4rem" textAlign="center">
           Níveis
         </Heading>
-        <Flex w="100%" justify="center" align="center" mt='40px' mb='40px'>
+        <Flex w="100%" justify="center" align="center" mt="40px" mb="40px">
           <Text
             // mb="60px"
             fontWeight="bold"
@@ -125,17 +120,17 @@ export function Level() {
                   hoveredCard === level.id ? "scale(1.05)" : "scale(1)"
                 }
                 cursor={
-                  hoveredCard === level.id && !level.isBlocked
+                  hoveredCard === level.id && !level.is_blocked
                     ? "pointer"
                     : "not-allowed"
                 }
                 onClick={() => {
-                  // if (!level.isBlocked) navigateTo(`/module/${level.id}`)
+                  if (!level.is_blocked) navigateTo(`/module/${level.id}`);
                 }}
               >
                 <Card
-                _hover={{ border: '1px solid #8FFF7C' }}
-                  border='1px solid #FC7CFF'
+                  _hover={{ border: "1px solid #8FFF7C" }}
+                  border="1px solid #FC7CFF"
                   bgColor="#51488B"
                   borderRadius="24px"
                   color="white"
@@ -149,7 +144,7 @@ export function Level() {
                     alignItems="center"
                     position="relative"
                   >
-                    {level.isBlocked && (
+                    {level.is_blocked && (
                       <Image
                         src={Cadeado}
                         position="absolute"
@@ -168,9 +163,9 @@ export function Level() {
             ))}
           </Grid>
         </Flex>
-        <Flex justify='space-around'>
-          <Image w='32%' mt='32px' src={WomanAstronaut}></Image>
-          <Image w='30%' mt='32px' src={ManAstronaut}></Image>
+        <Flex justify="space-around">
+          <Image w="32%" mt="32px" src={WomanAstronaut}></Image>
+          <Image w="30%" mt="32px" src={ManAstronaut}></Image>
         </Flex>
       </Flex>
     </Flex>

@@ -40,6 +40,7 @@ export function Home() {
     const fetchData = async () => {
       try {
         const result = await axiosInstance.get("/langs");
+
         const resultData = result.data;
 
         if (resultData.error) throw new Error();
