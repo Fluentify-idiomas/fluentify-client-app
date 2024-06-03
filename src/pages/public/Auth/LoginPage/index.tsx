@@ -13,7 +13,7 @@ import {
   InputRightElement,
   Link,
   Spacer,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -31,7 +31,7 @@ export function LoginPage() {
 
   const { navigateTo } = useAppRouter();
 
-  const { handleSignIn } = useAuthentication();
+  const { handleSignIn, handleSignOut } = useAuthentication();
 
   const {
     register,
@@ -44,28 +44,30 @@ export function LoginPage() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const result = await axiosInstance.post("/login", data);
-  
+
       if (result) {
         const resultData = await result.data;
         if (!resultData.error) {
-
           const userId = resultData.user_id;
-          
-          // const userRole: 'member' | 'not member' | 'banned' = resultData.user_role;
 
           handleSignIn(userId);
 
-          navigateTo('/home');
+          const userRole: "member" | "not member" | "banned" =
+            resultData.user_role;
+
+          if (userRole == "member") navigateTo("/home");
+          else if (userRole == "not member") navigateTo("/financial");
+          else if (userRole == "banned") handleSignOut();
+
           setSubmitError(false);
           return;
         }
       }
-  
+
       setSubmitError(true);
     } catch (err) {
       setSubmitError(true);
     }
-
   };
 
   return (
@@ -84,7 +86,7 @@ export function LoginPage() {
             <Flex justify="space-between" mb="52px">
               <Flex direction="column" maxWidth="45%">
                 <Input
-                id="email"
+                  id="email"
                   size="lg"
                   placeholder="Email"
                   maxWidth="100%"
@@ -148,14 +150,12 @@ export function LoginPage() {
             >
               Entrar
             </Button>
-            { submitError && (
-              <ErrorMessage mb="10px">
-              Email ou senha incorretos!
-            </ErrorMessage>
+            {submitError && (
+              <ErrorMessage mb="10px">Email ou senha incorretos!</ErrorMessage>
             )}
             <Text alignSelf="flex-start" mb="54px">
               Esqueceu sua senha ?
-              <Link href="/password-recovery" color="#E1F030" ml='4px'>
+              <Link href="/password-recovery" color="#E1F030" ml="4px">
                 Recupere aqui
               </Link>
             </Text>

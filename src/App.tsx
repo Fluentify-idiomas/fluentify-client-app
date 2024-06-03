@@ -13,6 +13,7 @@ import { UserRecoveryPassword } from "./pages/public/PasswordRecovery/UserRecove
 import { VerifyPasswordRecovery } from "./pages/public/PasswordRecovery/VerifyRecoveryPassword";
 import { AuthenticationProvider } from "./services/auth/auth.provider";
 import { AppRouterProvider } from "./services/router/router.provider";
+import { Financial } from "./pages/private/Financial";
 
 
 const publicRouters = [
@@ -62,6 +63,10 @@ const privateRouters = [
         <Exercise />
       </ExerciseProvider>
     )
+  },
+  {
+    path: '/financial',
+    element: <Financial />
   }
 ]
 
