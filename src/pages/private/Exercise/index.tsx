@@ -66,9 +66,9 @@ export function Exercise() {
   } = useDisclosure();
 
   const {
-    isOpen: isAlertOpen,
-    onOpen: onAlertOpen,
-    onClose: onAlertClose,
+    isOpen: isModalRedirectOpen,
+    onOpen: onModalRedirectOpen,
+    onClose: onModalRedirectClose,
   } = useDisclosure();
 
   const {
@@ -324,7 +324,7 @@ export function Exercise() {
             bgColor: "#8B64EF",
           }}
           onClick={() => {
-            onAlertOpen();
+            onModalRedirectOpen();
           }}
         >
           <Image src={ModelsIcon} />
@@ -569,40 +569,64 @@ export function Exercise() {
           </Flex>
         </ModalContent>
       </Modal>
-      <AlertDialog
-        motionPreset="slideInBottom"
-        leastDestructiveRef={cancelRef}
-        onClose={onAlertClose}
-        isOpen={isAlertOpen}
-        isCentered
+      <Modal
+        onClose={onModalRedirectClose}
+        isOpen={isModalRedirectOpen}
+        isCentered={true}
+        size="6xl"
       >
-        <AlertDialogOverlay bgColor="#000000dd" />
-
-        <AlertDialogContent>
-          <AlertDialogHeader>Cuidado!</AlertDialogHeader>
-          <AlertDialogCloseButton />
-          <AlertDialogBody>
-            Ao sair todo seu progresso neste módulo será perdido.
-            <br />
-            <br />
-            Tem certeza que deseja prosseguir ?
-          </AlertDialogBody>
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onAlertClose}>
-              No
-            </Button>
-            <Button
-              colorScheme="red"
-              ml={3}
-              onClick={() => {
-                navigateTo(`/module/${level_id}`);
-              }}
+        <ModalOverlay bgColor="#000000dd" />
+        <ModalContent
+          w="40vw"
+          h="40vh"
+          background="linear-gradient(to right, #10002B, #5A189A)"
+          borderRadius="24px"
+          p="32px"
+        >
+          <ModalHeader>
+            <Heading
+              color="white"
+              mb="2rem"
+              textAlign="center"
+              fontSize="2.6rem"
+              bgColor="#000000bf"
+              p="8px"
+              w="40%"
+              mx="auto"
             >
-              Yes
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+              Cuidado!!!
+            </Heading>
+          </ModalHeader>
+          <Flex justify="center" align="center" direction="column">
+            <Stack mb='48px'>
+              <Text fontWeight="bold" fontSize="1.2rem" mt="8px">
+                Ao voltar todo seu progresso será perdido
+              </Text>
+              <Text fontWeight="bold" fontSize="1.2rem" mt="8px">
+                Tem certeza que deseja sair ?
+              </Text>
+            </Stack>
+            <Flex justifyContent="flex-end" w='60%'>
+              <Button
+                colorScheme="red"
+                onClick={() => {
+                  navigateTo(`/module/${level_id}`);
+                }}
+              >
+                Sim
+              </Button>
+              <Button
+                colorScheme="green"
+                ml={3}
+                ref={cancelRef}
+                onClick={onModalRedirectClose}
+              >
+                Não
+              </Button>
+            </Flex>
+          </Flex>
+        </ModalContent>
+      </Modal>
     </Flex>
   );
 }
