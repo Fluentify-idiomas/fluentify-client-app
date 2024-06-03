@@ -1,12 +1,5 @@
 import { useAppRouter } from "@/services/router/router.hook";
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
   Button,
   Flex,
   Heading,
@@ -18,7 +11,7 @@ import {
   Stack,
   Text,
   useDisclosure,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -31,8 +24,8 @@ import LeftArrow from "/imgs/left-arrow.svg";
 import RightArrow from "/imgs/right-arrow.svg";
 
 import CongratulationsGif from "/gifs/gerbert-congratulations.gif";
-import WrongsGif from "/gifs/gerbert-wrong.gif";
 import FinishedGif from "/gifs/gerbert-finished.gif";
+import WrongsGif from "/gifs/gerbert-wrong.gif";
 
 import { axiosInstance } from "@/api/axios";
 import { userSessionStorageToken } from "@/services/auth/auth.provider";
