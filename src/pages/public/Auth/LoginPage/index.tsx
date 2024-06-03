@@ -50,6 +50,7 @@ export function LoginPage() {
         if (!resultData.error) {
 
           const userId = resultData.user_id;
+          const userRole: 'member' | 'not member' | 'banned' = resultData.user_role;
 
           handleSignIn(userId);
 

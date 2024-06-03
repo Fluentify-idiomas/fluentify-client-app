@@ -54,7 +54,7 @@ export function RegisterPage() {
 
       if (passwordMatch) {
         const payload = {
-          first_name: data.name,
+          name: data.name,
           email: data.email,
           password: data.password,
         }

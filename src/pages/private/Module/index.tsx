@@ -8,18 +8,18 @@ import {
   Flex,
   Grid,
   Heading,
-  Image,
-  Text,
+  Image
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { userSessionStorageToken } from "@/services/auth/auth.provider";
 import Cadeado from "/imgs/cadeado.svg";
 
 type ModuleItemType = {
   id: number;
   name: string;
-  isBlocked: boolean;
+  is_blocked: boolean;
 };
 
 type LangInfoType = {
@@ -51,21 +51,20 @@ export function Module() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axiosInstance.get(`/modules/${id}`);
+        const auth = sessionStorage.getItem(userSessionStorageToken);
+
+        const payload = {
+          user_id: auth,
+          lang_id: 1, // Fixo inglẽs,
+          level_id: id,
+        }
+
+        const result = await axiosInstance.post('/modules', payload);
         const resultData: ModuleType = result.data;
 
-        const moduleListWithBlockFlag = resultData.module_list.map(
-          (moduleItem: ModuleItemType) => {
-            return {
-              ...moduleItem,
-              isBlocked: moduleItem.id !== 1 ? true : false,
-            };
-          }
-        );
+        console.log(resultData);
 
-        resultData.module_list = moduleListWithBlockFlag;
-
-        if (resultData.error) throw new Error();
+        // if (resultData.error) throw new Error();
 
         setModules(resultData);
 
@@ -109,12 +108,12 @@ export function Module() {
                     hoveredCard === moduleItem.id ? "scale(1.05)" : "scale(1)"
                   }
                   cursor={
-                    hoveredCard === moduleItem.id && !moduleItem.isBlocked
+                    hoveredCard === moduleItem.id && !moduleItem.is_blocked
                       ? "pointer"
                       : "not-allowed"
                   }
                   onClick={() => {
-                    if (!moduleItem.isBlocked) navigateTo(`/exercises/${moduleItem.id}`);
+                    if (!moduleItem.is_blocked) navigateTo(`/exercises/${moduleItem.id}`);
                   }}
                 >
                   <Card
@@ -133,7 +132,7 @@ export function Module() {
                       alignItems="center"
                       position="relative"
                     >
-                      {moduleItem.isBlocked && (
+                      {moduleItem.is_blocked && (
                         <Image
                           src={Cadeado}
                           position="absolute"
