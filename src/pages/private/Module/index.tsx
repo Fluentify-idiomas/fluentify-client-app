@@ -32,6 +32,7 @@ type ModuleType = {
   error: any;
   lang_info: LangInfoType;
   module_list: ModuleItemType[];
+  level_id?: number;
 };
 
 export function Module() {
@@ -45,6 +46,8 @@ export function Module() {
 
   const [hasFetched, setHasFetched] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const [levelId, setLevelId] = useState<number>();
 
   const { navigateTo } = useAppRouter();
 
@@ -62,9 +65,7 @@ export function Module() {
         const result = await axiosInstance.post('/modules', payload);
         const resultData: ModuleType = result.data;
 
-        console.log(resultData);
-
-        // if (resultData.error) throw new Error();
+        setLevelId(resultData.level_id);
 
         setModules(resultData);
 
@@ -113,7 +114,7 @@ export function Module() {
                       : "not-allowed"
                   }
                   onClick={() => {
-                    if (!moduleItem.is_blocked) navigateTo(`/exercises/${moduleItem.id}`);
+                    if (!moduleItem.is_blocked) navigateTo(`/exercises/${moduleItem.id}/${levelId}`);
                   }}
                 >
                   <Card

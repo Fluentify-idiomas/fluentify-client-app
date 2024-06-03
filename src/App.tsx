@@ -56,7 +56,7 @@ const privateRouters = [
     element: <Module />
   },
   {
-    path: '/exercises/:module_id',
+    path: '/exercises/:module_id/:level_id',
     element: (
       <ExerciseProvider>
         <Exercise />

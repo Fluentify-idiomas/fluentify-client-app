@@ -81,7 +81,7 @@ export function Exercise() {
 
   const toast = useToast();
 
-  let { module_id } = useParams();
+  let { module_id, level_id } = useParams();
 
   const { getModuleExercises } = useExercise();
   const { navigateTo } = useAppRouter();
@@ -107,7 +107,7 @@ export function Exercise() {
       setTimeout(() => {
         onConclusionModalClose();
         navigateTo(`/module/${module_id}`);
-      }, 4_000);
+      }, 5_000);
     }
   }, [quantityExerciseRight]);
 
@@ -149,8 +149,6 @@ export function Exercise() {
     const fetchData = async () => {
       try {
         const moduleExercises = await getModuleExercises(Number(module_id));
-
-        console.log(moduleExercises);
 
         const text_content_pt_br: string[] =
           moduleExercises.texts_enunciated[0].text_content_pt_br.split("\n");
@@ -597,7 +595,7 @@ export function Exercise() {
               colorScheme="red"
               ml={3}
               onClick={() => {
-                navigateTo(`/module/${module_id}`);
+                navigateTo(`/module/${level_id}`);
               }}
             >
               Yes

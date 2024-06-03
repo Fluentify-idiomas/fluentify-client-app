@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/api/axios";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { ExerciseContext } from "./exercise.context";
 
 interface Props {
@@ -29,23 +29,21 @@ export interface ExercisesInfo {
   exercises: IExercise[]
 }
 
+export interface DataReturned {
+  moduleExercises: ExercisesInfo;
+  level_id: number;
+}
+
 interface ResultData {
   error: any;
   module_info: any;
+  level_id: number;
 }
 
 export function ExerciseProvider({ children }: Props) {
-  const [exercises, setExercises] = useState({} as ExercisesInfo);
-
-  function seeData(): void {
-    console.log(exercises);
-  }
-
   async function getModuleExercises(module: number): Promise<ExercisesInfo> {
     const result = await axiosInstance.get(`/exercises/${module}`);
     const resultData: ResultData = result.data;
-
-    setExercises(resultData.module_info);
 
     return resultData.module_info;
   }
@@ -54,7 +52,6 @@ export function ExerciseProvider({ children }: Props) {
     <ExerciseContext.Provider
       value={{
         getModuleExercises,
-        seeData,
       }}
     >
       {children}
