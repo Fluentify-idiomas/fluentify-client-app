@@ -63,7 +63,7 @@ export function Financial() {
 
     const result = await axiosInstance.post("/checkout/verify", payload);
 
-    const { approved, expired, failure, pending } = result.data;
+    const { approved } = result.data;
 
     if (approved) navigateTo('/home');
   }
